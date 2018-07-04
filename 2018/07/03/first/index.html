@@ -9,7 +9,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+        <meta name="description" content="梅翔学长今天给我们温习了前天的内容并讲解了一些二进制的内容并涉及了一些栈和栈帧。">
     
 
     <!--Author-->
@@ -19,7 +19,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Hello World"/>
+        <meta property="og:title" content="二进制"/>
     
 
     <!--Page Cover-->
@@ -29,7 +29,7 @@
 
     <!-- Title -->
     
-    <title>Hello World - Hexo</title>
+    <title>二进制 - Hexo</title>
 
     <!--Open Graph Site Name-->
     <meta property="og:site_name" content="Hexo"/>
@@ -134,29 +134,37 @@
         <div class="row post-title">
             <!-- Post Title -->
             <div class="col-md-12">
-                <h1>Hello World</h1>
+                <h1>二进制</h1>
                 <span class="meta">
                     <!-- Date and Author -->
                     
-                    2018-07-04
+                    2018-07-03
                     
 
-
+tagged on #<a href="/tags/Bin/">Bin </a>#<a href="/tags/ctf/">ctf </a>
                 </span> 
             </div>
         </div>
         <div class="row post-content">
             <!-- Post Main Content -->
             <div class="col-md-12">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <p>梅翔学长今天给我们温习了前天的内容并讲解了一些二进制的内容并涉及了一些栈和栈帧。</p>
+<a id="more"></a>
+<h1 id="小端序"><a href="#小端序" class="headerlink" title="小端序"></a>小端序</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>1、在计算机领域 许多字节数据是在计算机内存中存放的字节顺序。</p>
+<p>2、主要分为大端序和小端序。</p>
+<p>3、数据的高位字节存放在地址的高端 低位字节存放在地址低端。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><img src="https://i.imgur.com/gY8ZqAs.png" alt=""><br><img src="https://i.imgur.com/rQ4jbU3.png" alt=""><img src="https://i.imgur.com/fGqNhhf.png" alt=""></p>
+<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="栈-1"><a href="#栈-1" class="headerlink" title="栈"></a>栈</h2><p><img src="https://i.imgur.com/PPE7SUo.png" alt=""></p>
+<h2 id="栈的特性"><a href="#栈的特性" class="headerlink" title="栈的特性"></a>栈的特性</h2><p>1、先进后出</p>
+<p>2、从高地址像低地址延伸</p>
+<h2 id="栈的用途"><a href="#栈的用途" class="headerlink" title="栈的用途"></a>栈的用途</h2><p>1、暂时保存变量</p>
+<p>2、调用函数时传递参数</p>
+<p>3、保存函数返回地址</p>
+<h1 id="今天小作业"><a href="#今天小作业" class="headerlink" title="今天小作业"></a>今天小作业</h1><p><img src="https://i.imgur.com/MgEjwsx.png" alt=""><br>1、swap读入a和b的地址</p>
+<p>2、x等于a的地址指向的值</p>
+<p>3、*a等于b的地址指向的值</p>
+<p>4、b*等于x</p>
+<p>所以最后执行结果a=0，b=1</p>
 
             </div>
         </div>
