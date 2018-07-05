@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。">
+<meta name="keywords" content="Bin,ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集训第五天：从汇编语言到C语言">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/third/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/Tb8BEQL.png">
+<meta property="og:image" content="https://i.imgur.com/RRgoUmj.png">
+<meta property="og:image" content="https://i.imgur.com/2CzeWUd.png">
+<meta property="og:image" content="https://i.imgur.com/aseo22k.png">
+<meta property="og:image" content="https://i.imgur.com/MmUvvtA.png">
+<meta property="og:updated_time" content="2018-07-05T14:19:40.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集训第五天：从汇编语言到C语言">
+<meta name="twitter:description" content="初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。">
+<meta name="twitter:image" content="https://i.imgur.com/Tb8BEQL.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>集训第五天：从汇编语言到C语言</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/07/04/second/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/05/third/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/05/third/&text=集训第五天：从汇编语言到C语言"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/05/third/&is_video=false&description=集训第五天：从汇编语言到C语言"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第五天：从汇编语言到C语言&body=Check out this article: http://yoursite.com/2018/07/05/third/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/05/third/&name=集训第五天：从汇编语言到C语言&description=&lt;p&gt;初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#if"><span class="toc-number">1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#if-else"><span class="toc-number">2.</span> <span class="toc-text">if else</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#do-while"><span class="toc-number">3.</span> <span class="toc-text">do while</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#switch-case"><span class="toc-number">4.</span> <span class="toc-text">switch case</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#homework"><span class="toc-number">5.</span> <span class="toc-text">homework</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键代码段处："><span class="toc-number">5.1.</span> <span class="toc-text">关键代码段处：</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+    <a href="https://github.com/Shmilylbj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        集训第五天：从汇编语言到C语言
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-05T04:24:49.000Z" itemprop="datePublished">2018-07-05</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Bin/">Bin</a>, <a class="tag-link" href="/tags/ctf/">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。</p>
+<a id="more"></a>
+<h1 id="if"><a href="#if" class="headerlink" title="if"></a>if</h1><p>if就是通过简单的一个CMP判断后JMP来实现</p>
+<p> #include&lt;stdio.h&gt;</p>
+<p>int main()｛</p>
+<pre><code>int a = 1;
+
+if(a &gt; 0)
+
+    printf(&quot;greater&quot;);
+
+return 0;
+</code></pre><p>}</p>
+<p>汇编代码：</p>
+<pre><code>0x10ddcff50 &lt;+0&gt;:  pushq  %rbp
+0x10ddcff51 &lt;+1&gt;:  movq   %rsp, %rbp
+0x10ddcff54 &lt;+4&gt;:  subq   $0x10, %rsp
+0x10ddcff58 &lt;+8&gt;:  movl   $0x0, -0x4(%rbp)
+0x10ddcff5f &lt;+15&gt;: movl   $0x1, -0x8(%rbp)
+
+-&gt;0x10ddcff66 &lt;+22&gt;: cmpl   $0x0, -0x8(%rbp)
+
+0x10ddcff6a &lt;+26&gt;: jle    0x10ddcff81               ; &lt;+49&gt; at main.cpp
+0x10ddcff70 &lt;+32&gt;: leaq   0x33(%rip), %rdi          ; &quot;greater&quot;
+0x10ddcff77 &lt;+39&gt;: movb   $0x0, %al
+0x10ddcff79 &lt;+41&gt;: callq  0x10ddcff8a               ; symbol stub for: printf
+0x10ddcff7e &lt;+46&gt;: movl   %eax, -0xc(%rbp)
+0x10ddcff81 &lt;+49&gt;: xorl   %eax, %eax
+0x10ddcff83 &lt;+51&gt;: addq   $0x10, %rsp
+0x10ddcff87 &lt;+55&gt;: popq   %rbp
+0x10ddcff88 &lt;+56&gt;: retq
+</code></pre><h1 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h1><p>相比if多了一个条件，需要加一个JMP</p>
+<p> #include&lt;stdio.h&gt;</p>
+<p>int main()</p>
+<p>{</p>
+<pre><code>int a = 1;
+
+if(a &gt; 0)
+
+    printf(&quot;greater&quot;);
+
+else
+
+    printf(&quot;smaller&quot;);
+
+return 0;
+</code></pre><p>}</p>
+<p>汇编代码：</p>
+<pre><code>0x106f1ef30 &lt;+0&gt;:  pushq  %rbp
+
+0x106f1ef31 &lt;+1&gt;:  movq   %rsp, %rbp
+
+0x106f1ef34 &lt;+4&gt;:  subq   $0x10, %rsp
+
+0x106f1ef38 &lt;+8&gt;:  movl   $0x0, -0x4(%rbp)
+
+0x106f1ef3f &lt;+15&gt;: movl   $0x1, -0x8(%rbp)
+
+ -&gt;  0x106f1ef46 &lt;+22&gt;: cmpl   $0x0, -0x8(%rbp)
+
+0x106f1ef4a &lt;+26&gt;: jle    0x106f1ef66               ; &lt;+54&gt; at main.cpp
+
+0x106f1ef50 &lt;+32&gt;: leaq   0x4b(%rip), %rdi          ; &quot;greater&quot;
+
+0x106f1ef57 &lt;+39&gt;: movb   $0x0, %al
+
+0x106f1ef59 &lt;+41&gt;: callq  0x106f1ef80              ; symbol stub for: printf
+
+0x106f1ef5e &lt;+46&gt;: movl   %eax, -0xc(%rbp)
+
+0x106f1ef61 &lt;+49&gt;: jmp    0x106f1ef77               ; &lt;+71&gt; at main.cpp
+
+0x106f1ef66 &lt;+54&gt;: leaq   0x3d(%rip), %rdi          ; &quot;smaller&quot;
+
+0x106f1ef6d &lt;+61&gt;: movb   $0x0, %al
+
+0x106f1ef6f &lt;+63&gt;: callq  0x106f1ef80               ; symbol stub for: printf
+
+0x106f1ef74 &lt;+68&gt;: movl   %eax, -0x10(%rbp)
+
+0x106f1ef77 &lt;+71&gt;: xorl   %eax, %eax
+
+0x106f1ef79 &lt;+73&gt;: addq   $0x10, %rsp
+
+0x106f1ef7d &lt;+77&gt;: popq   %rbp
+0x106f1ef7e &lt;+78&gt;: retq
+</code></pre><h1 id="do-while"><a href="#do-while" class="headerlink" title="do while"></a>do while</h1><p>do while在每次循环结束时会进行一次CMP，然后判断后再JMP或者继续执行</p>
+<p> #include&lt;stdio.h&gt;</p>
+<p>int main()</p>
+<p>{<br>    int a = 1;</p>
+<pre><code>do
+
+{
+
+    a++;
+
+}while(a &lt; 10);
+
+return 0;
+</code></pre><p>}</p>
+<p>汇编代码：</p>
+<pre><code>0x106d3df80 &lt;+0&gt;:  pushq  %rbp
+0x106d3df81 &lt;+1&gt;:  movq   %rsp, %rbp
+0x106d3df84 &lt;+4&gt;:  movl   $0x0, -0x4(%rbp)
+0x106d3df8b &lt;+11&gt;: movl   $0x1, -0x8(%rbp)
+-&gt;  0x106d3df92 &lt;+18&gt;: movl   -0x8(%rbp), %eax
+0x106d3df95 &lt;+21&gt;: addl   $0x1, %eax
+0x106d3df98 &lt;+24&gt;: movl   %eax, -0x8(%rbp)
+0x106d3df9b &lt;+27&gt;: cmpl   $0xa, -0x8(%rbp)
+0x106d3df9f &lt;+31&gt;: jl     0x106d3df92               ; &lt;+18&gt; at main.cpp:240
+0x106d3dfa5 &lt;+37&gt;: xorl   %eax, %eax
+0x106d3dfa7 &lt;+39&gt;: popq   %rbp
+0x106d3dfa8 &lt;+40&gt;: retq
+</code></pre><h1 id="switch-case"><a href="#switch-case" class="headerlink" title="switch case"></a>switch case</h1><p>switch case需要对每个条件逐个判断，满足条件时，JMP出循环</p>
+<p> #include &lt;stdio.h&gt;</p>
+<p> #include <random><br>int main()</random></p>
+<p>{</p>
+<pre><code>int a = rand();
+switch(a)
+{
+    case 1:
+        printf(&quot;1&quot;);
+        break;
+    case 2:
+        printf(&quot;2&quot;);
+        break;
+    default:
+        printf(&quot;No&quot;);
+        break;
+}
+return 0;
+</code></pre><p>}</p>
+<p>输入1后的汇编代码：</p>
+<pre><code>0x107c94ef0 &lt;+0&gt;:   pushq  %rbp
+0x107c94ef1 &lt;+1&gt;:   movq   %rsp, %rbp
+0x107c94ef4 &lt;+4&gt;:   subq   $0x20, %rsp
+0x107c94ef8 &lt;+8&gt;:   movl   $0x0, -0x4(%rbp)
+0x107c94eff &lt;+15&gt;:  callq  0x107c94f80               ; symbol stub for: rand
+0x107c94f04 &lt;+20&gt;:  movl   %eax, -0x8(%rbp)
+-&gt;  0x107c94f07 &lt;+23&gt;:  movl   -0x8(%rbp), %eax
+0x107c94f0a &lt;+26&gt;:  movl   %eax, %ecx
+0x107c94f0c &lt;+28&gt;:  subl   $0x1, %ecx
+0x107c94f0f &lt;+31&gt;:  movl   %eax, -0xc(%rbp)
+0x107c94f12 &lt;+34&gt;:  movl   %ecx, -0x10(%rbp)
+0x107c94f15 &lt;+37&gt;:  je     0x107c94f34               ; &lt;+68&gt; at main.cpp
+0x107c94f1b &lt;+43&gt;:  jmp    0x107c94f20               ; &lt;+48&gt; at main.cpp
+0x107c94f20 &lt;+48&gt;:  movl   -0xc(%rbp), %eax
+0x107c94f23 &lt;+51&gt;:  subl   $0x2, %eax
+0x107c94f26 &lt;+54&gt;:  movl   %eax, -0x14(%rbp)
+0x107c94f29 &lt;+57&gt;:  je     0x107c94f4a               ; &lt;+90&gt; at main.cpp
+0x107c94f2f &lt;+63&gt;:  jmp    0x107c94f60               ; &lt;+112&gt; at main.cpp
+0x107c94f34 &lt;+68&gt;:  leaq   0x71(%rip), %rdi          ; &quot;&apos;1&apos;&quot;
+0x107c94f3b &lt;+75&gt;:  movb   $0x0, %al
+0x107c94f3d &lt;+77&gt;:  callq  0x107c94f7a               ; symbol stub for: printf
+0x107c94f42 &lt;+82&gt;:  movl   %eax, -0x18(%rbp)
+0x107c94f45 &lt;+85&gt;:  jmp    0x107c94f71               ; &lt;+129&gt; at main.cpp
+0x107c94f4a &lt;+90&gt;:  leaq   0x5d(%rip), %rdi          ; &quot;&apos;2&apos;&quot;
+0x107c94f51 &lt;+97&gt;:  movb   $0x0, %al
+0x107c94f53 &lt;+99&gt;:  callq  0x107c94f7a               ; symbol stub for: printf
+0x107c94f58 &lt;+104&gt;: movl   %eax, -0x1c(%rbp)
+0x107c94f5b &lt;+107&gt;: jmp    0x107c94f71               ; &lt;+129&gt; at main.cpp
+0x107c94f60 &lt;+112&gt;: leaq   0x49(%rip), %rdi          ; &quot;No&quot;
+0x107c94f67 &lt;+119&gt;: movb   $0x0, %al
+0x107c94f69 &lt;+121&gt;: callq  0x107c94f7a               ; symbol stub for: printf
+0x107c94f6e &lt;+126&gt;: movl   %eax, -0x20(%rbp)
+0x107c94f71 &lt;+129&gt;: xorl   %eax, %eax
+0x107c94f73 &lt;+131&gt;: addq   $0x20, %rsp
+0x107c94f77 &lt;+135&gt;: popq   %rbp
+0x107c94f78 &lt;+136&gt;: retq
+</code></pre><h1 id="homework"><a href="#homework" class="headerlink" title="homework"></a>homework</h1><p>在虚拟机里运行OD并打开homework.exe，并找到main函数</p>
+<p><img src="https://i.imgur.com/Tb8BEQL.png" alt=""></p>
+<p>阅读并观察汇编程序，然后推测源程序的代码</p>
+<p><img src="https://i.imgur.com/RRgoUmj.png" alt=""></p>
+<p>这里可以看到puts函数输出一段字符串：“please input the flag”，然后有一个scanf函数来接收输入的字符串。</p>
+<p><img src="https://i.imgur.com/2CzeWUd.png" alt="">strlen比较字符串长度</p>
+<p><img src="https://i.imgur.com/aseo22k.png" alt=""><br>关键代码段和strcmp比较字符串</p>
+<h2 id="关键代码段处："><a href="#关键代码段处：" class="headerlink" title="关键代码段处："></a>关键代码段处：</h2><p>MOV [local.5],0x0</p>
+<p>JMP short homework.00401452</p>
+<p>MOV ECX,[local.5]</p>
+<p>MOV EAX,[local.5]</p>
+<p>MOV DL,byte ptr ss:[EBP+EAX-0x98]</p>
+<p>MOV EAX,[local.5]</p>
+<p>XOR EAX,EDX</p>
+<p>MOV byte ptr ss:[EBP+ECX-0x98],AL</p>
+<p>INC [local.5]</p>
+<p>CMP [local.5],0x1A</p>
+<p>JLE short homework.00401436</p>
+<p>这里的[local.5]可以理解为一个变量，EAX中存放的是变量[local.5]的值，EDX中存放的是输入的字符串中的一个字符。设[local.5]的值为i，每次取出字符串中第i个字符，将该字符与i进行异或，结果存入字符串的第i个。</p>
+<p><img src="https://i.imgur.com/MmUvvtA.png" alt="">最后经过操作后等于被加密字符串就会Congratulations</p>
+<p>容易知道需要求出解密算法才能获得正确的字符串<br>因为异或运算可以通过二次运算重新得到</p>
+<p> #include &lt;stdio.h&gt;<br>int main()</p>
+<p>{</p>
+<pre><code>int a = 1;
+
+printf(&quot;%d\n%d\n%d\n&quot;, a, a ^ 100, a ^ 100 ^ 100);
+
+return 0;
+</code></pre><p>}</p>
+<p>故这里的加密属于一种对称加密方式，只需要将被加密的字符串再加密一次就能的到</p>
+<p> #include &lt;stdio.h&gt;<br>int main()</p>
+<p>{</p>
+<pre><code>char str[28] = &quot;Tnfb}eu&apos;`fgn{b|d0xa3gz6ryjc&quot;;
+for(int i = 0; i &lt; 27; i++)
+    str[i] ^= i;
+printf(&quot;%s&quot;, str);
+return 0;
+</code></pre><p>}</p>
+<p>拿到flag：</p>
+<p>Today`s homework is so easy</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#if"><span class="toc-number">1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#if-else"><span class="toc-number">2.</span> <span class="toc-text">if else</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#do-while"><span class="toc-number">3.</span> <span class="toc-text">do while</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#switch-case"><span class="toc-number">4.</span> <span class="toc-text">switch case</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#homework"><span class="toc-number">5.</span> <span class="toc-text">homework</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键代码段处："><span class="toc-number">5.1.</span> <span class="toc-text">关键代码段处：</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/05/third/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/05/third/&text=集训第五天：从汇编语言到C语言"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/05/third/&is_video=false&description=集训第五天：从汇编语言到C语言"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第五天：从汇编语言到C语言&body=Check out this article: http://yoursite.com/2018/07/05/third/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/05/third/&title=集训第五天：从汇编语言到C语言"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/05/third/&name=集训第五天：从汇编语言到C语言&description=&lt;p&gt;初次见面的学长今天给我们简单讲解了“从汇编语言到C语言”，并布置了一些例题。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    Copyright &copy; 2018 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
