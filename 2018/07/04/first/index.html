@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="杨涛学长今天给介绍了XSS。">
+<meta name="keywords" content="web,ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集训第八天：XSS">
+<meta property="og:url" content="http://yoursite.com/2018/07/04/first/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="杨涛学长今天给介绍了XSS。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/iw6zCxi.png">
+<meta property="og:image" content="https://i.imgur.com/NOeLhFu.png">
+<meta property="og:updated_time" content="2018-07-09T06:51:56.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集训第八天：XSS">
+<meta name="twitter:description" content="杨涛学长今天给介绍了XSS。">
+<meta name="twitter:image" content="https://i.imgur.com/iw6zCxi.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>集训第八天：XSS</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/07/04/second/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/07/02/hello-world/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/04/first/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/04/first/&text=集训第八天：XSS"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/04/first/&is_video=false&description=集训第八天：XSS"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第八天：XSS&body=Check out this article: http://yoursite.com/2018/07/04/first/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/04/first/&name=集训第八天：XSS&description=&lt;p&gt;杨涛学长今天给介绍了XSS。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识（了解掌握）"><span class="toc-number">1.</span> <span class="toc-text">基础知识（了解掌握）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">1.1.</span> <span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript："><span class="toc-number">1.2.</span> <span class="toc-text">Javascript：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie与session："><span class="toc-number">1.3.</span> <span class="toc-text">cookie与session：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF"><span class="toc-number">1.4.</span> <span class="toc-text">WAF</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Javascript弹框操作"><span class="toc-number">2.</span> <span class="toc-text">Javascript弹框操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS"><span class="toc-number">3.</span> <span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#危害"><span class="toc-number">3.1.</span> <span class="toc-text">危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射型XSS"><span class="toc-number">3.2.</span> <span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储型XSS"><span class="toc-number">3.3.</span> <span class="toc-text">存储型XSS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绕过XSS限制"><span class="toc-number">4.</span> <span class="toc-text">绕过XSS限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关PHP函数"><span class="toc-number">5.</span> <span class="toc-text">相关PHP函数</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+    <a href="https://github.com/Shmilylbj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        集训第八天：XSS
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-04T05:10:57.845Z" itemprop="datePublished">2018-07-04</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/ctf/">ctf</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>杨涛学长今天给介绍了XSS。</p>
+<a id="more"></a>
+<h1 id="基础知识（了解掌握）"><a href="#基础知识（了解掌握）" class="headerlink" title="基础知识（了解掌握）"></a>基础知识（了解掌握）</h1><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>一种超文本标记语言。其结构包括头部分（Head）和主体部分（Body），其中头部提供关于网页的信息，主体部分提供网页的具体内容。由HTML各类标签组成。</p>
+<p>各类标签：</p>
+<p>img：<br>插入图片</p>
+<p>body：<br>文档的主体</p>
+<p>iframe：<br>在网页显示网页</p>
+<h2 id="Javascript："><a href="#Javascript：" class="headerlink" title="Javascript："></a>Javascript：</h2><p>一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML网页上使用，用来给HTML网页增加动态功能。</p>
+<h2 id="cookie与session："><a href="#cookie与session：" class="headerlink" title="cookie与session："></a>cookie与session：</h2><p>会话（Session）跟踪是Web程序中常用的技术，用来跟踪用户的整个会话。常用的会话跟踪技术是Cookie与Session。Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录信息确定用户身份。</p>
+<h2 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h2><p>Web应用防护系统（也称：网站应用级入侵防御系统。英文：Web Application Firewall，简称： WAF）。国际上公认的一种说法是：Web应用防火墙是通过执行一系列针对HTTP/HTTPS的安全策略来专门为Web应用提供保护的一款产品。</p>
+<h1 id="Javascript弹框操作"><a href="#Javascript弹框操作" class="headerlink" title="Javascript弹框操作"></a>Javascript弹框操作</h1><p>Javascript函数内嵌实现形式：<script>Javascript的函数</script><br>相关函数：</p>
+<p>alert()：用于提示</p>
+<p>confirm()：用于和用户交互确认</p>
+<p>prompt()：弹框让用户输入信息</p>
+<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p>跨站脚本攻击（cross site script execution），一种出现在web应用程序中的计算机安全漏洞。由于web应用对用户的输入过滤不严而产生。恶意攻击者通过HTML注入篡改网页，插入恶意脚本，从而控制用户浏览器行为的一种攻击方式。</p>
+<h2 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h2><p>1、网络钓鱼，包括盗取各类的用户账号</p>
+<p>2、窃取用户cookie</p>
+<p>3、强制弹出广告页面，刷流量</p>
+<p>4、页面挂马</p>
+<p>5、提升用户权限，进一步渗透网站</p>
+<p>6、传播扩展脚本蠕虫</p>
+<p>相比于SQL注入，SQL注入是对后端的恶意篡改，而XSS是对前端的恶意攻击。</p>
+<h2 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h2><p>也称为非持久性、参数型跨站脚本。主要用于将恶意的脚本附加到URL地址的参数中。</p>
+<p>一般使用的已经构造好的恶意URL发送给受害者，诱使受害者点击触发，只执行一次。</p>
+<p><img src="https://i.imgur.com/iw6zCxi.png" alt="">杨涛学长的反射型XSS原理图</p>
+<h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>比反射型跨站脚本更具威胁，并且可能影响到web服务器的自身安全。</p>
+<p>攻击者事先将恶意JavaScript代码上传或存储到漏洞服务器中，只要受害者浏览包含此恶意代码的页面就会执行恶意代码。</p>
+<p><img src="https://i.imgur.com/NOeLhFu.png" alt=""></p>
+<h1 id="绕过XSS限制"><a href="#绕过XSS限制" class="headerlink" title="绕过XSS限制"></a>绕过XSS限制</h1><p>绕过magic_quotes_gpc（通过String.fromCharCode()函数）</p>
+<p>HEX编码</p>
+<p>改变大小写</p>
+<p>关闭标签 <code>（&gt;&lt;script&gt;slert(&#39;xss&#39;);&lt;/script&gt;）</code>（闭合前面的标签）</p>
+<h1 id="相关PHP函数"><a href="#相关PHP函数" class="headerlink" title="相关PHP函数"></a>相关PHP函数</h1><p>str_replace()：以其他字符替换字符串中的一些字符（区分大小写）</p>
+<p>addslashes()：在预定义字符（’、”、\、NULL）之前添加反斜杠</p>
+<p>stripslashes()：删除由addslashes()函数添加的反斜杠</p>
+<p>trim()：移除字符串两侧的空白字符或其他预定义字符</p>
+<p>htmlspecialchars()：把预定义的字符转换为HTML实体（&amp;（和号）成为&amp;；”（双引号）成为”；’（单引号）成为 ‘；&lt;（小于）成为&lt;；&gt;（大于）成为&gt;）</p>
+<p>htmlspecialchars_decode()：把预定义的HTML实体转换为字符</p>
+<p>mysql_real_escape_string()：对字符串中的特殊符号（\x00、\n、\r、\、‘、“、\x1a）进行转义</p>
+<p>strip_tags()：剥去字符串中的 HTML、XML 以及 PHP 的标签，但允许使用<strong>标签</strong></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础知识（了解掌握）"><span class="toc-number">1.</span> <span class="toc-text">基础知识（了解掌握）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">1.1.</span> <span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript："><span class="toc-number">1.2.</span> <span class="toc-text">Javascript：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie与session："><span class="toc-number">1.3.</span> <span class="toc-text">cookie与session：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF"><span class="toc-number">1.4.</span> <span class="toc-text">WAF</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Javascript弹框操作"><span class="toc-number">2.</span> <span class="toc-text">Javascript弹框操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS"><span class="toc-number">3.</span> <span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#危害"><span class="toc-number">3.1.</span> <span class="toc-text">危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反射型XSS"><span class="toc-number">3.2.</span> <span class="toc-text">反射型XSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储型XSS"><span class="toc-number">3.3.</span> <span class="toc-text">存储型XSS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绕过XSS限制"><span class="toc-number">4.</span> <span class="toc-text">绕过XSS限制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#相关PHP函数"><span class="toc-number">5.</span> <span class="toc-text">相关PHP函数</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/04/first/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/04/first/&text=集训第八天：XSS"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/04/first/&is_video=false&description=集训第八天：XSS"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第八天：XSS&body=Check out this article: http://yoursite.com/2018/07/04/first/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/04/first/&title=集训第八天：XSS"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/04/first/&name=集训第八天：XSS&description=&lt;p&gt;杨涛学长今天给介绍了XSS。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    Copyright &copy; 2018 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
